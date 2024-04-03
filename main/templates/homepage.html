@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block start %}
+    <h2 class="my-3 text-center">All Movies List</h2>
+    <form action="">
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <input name="search" class="form-control" id="exampleFormControlInput1" placeholder="search your favourite movies">
+        <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+    </form>
+    <hr>
+    <div class="container bg-light p-4">
+        <div class="card">
+            <div class="card-body bg-light-300">
+                <div class="row">
+                    {% for movie in movies %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card mb-3" style="width: 18rem;"> <!-- Set a fixed width for the card -->
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <img src="{{ movie.poster }}" alt="" class="img-fluid" style="height: 200px;"> <!-- Set a fixed height for the image -->
+                                    <h3 class="card-title mt-3">{{ movie.name }}</h3>
+                                    <p class="card-text">
+                                        <small class="text-muted">{{ movie.release_date }}</small>
+                                    </p>
+                                    <a href="{% url 'movie_details' movie.id %}" class="btn btn-primary">Read more..</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

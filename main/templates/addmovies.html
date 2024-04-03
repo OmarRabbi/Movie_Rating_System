@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block start %}
+    <h2 class="my-3 text-center">{{controller}}</h2>
+<form class="container p-5" style="background-color: #e3f2fd;" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row mb-4">
+        <div class="col">
+          <label for="exampleFormControlTextarea1" class="form-label">Movie Name</label>
+          <input type="text" class="form-control" required name="movie_name" value="{{movie.name}}" placeholder="Movie Name" aria-label="name">
+        </div>
+        <div class="col-8">
+            <label for="exampleFormControlTextarea1" class="form-label">Movie Description</label>
+            <textarea class="form-control" name="movie_description" required id="exampleFormControlTextarea1" placeholder="Movie Description" rows="2">{{movie.description}}</textarea>
+        </div>
+    </div>
+    <div class="row mb-4">
+            <div class="col">
+              <label for="exampleFormControlTextarea1" class="form-label">Movie Director</label>
+              <input type="text" class="form-control" required name="movie_director" value="{{movie.director}}" placeholder="Movie Director" aria-label="name">
+            </div>
+            <div class="col">
+                <label for="exampleFormControlTextarea1" class="form-label">Movie Cast</label>
+                <input type="text" class="form-control" required name="movie_cast" value="{{movie.cast}}" placeholder="Movie Cast" aria-label="name">
+            </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col">
+            <label for="exampleFormControlTextarea1" class="form-label">Movie Genre</label>
+            <input type="text" class="form-control" required name="movie_genre" value="{{movie.genre}}" placeholder="Movie Genre" aria-label="genre">
+        </div>
+        <div class="col">
+            <label for="validationCustom04" class="form-label">Rating</label>
+            <select class="form-select" name="movie_rating" id="validationCustom04">
+            <option selected disabled value="">Choose...</option>
+            <option {% if movie.rating == 'G' %} selected {% endif %}>G</option>
+            <option {% if movie.rating == 'PG' %} selected {% endif %}>PG</option>
+            <option {% if movie.rating == 'PG-13' %} selected {% endif %}>PG-13</option>
+            <option {% if movie.rating == 'R' %} selected {% endif %}>R</option>
+            <option {% if movie.rating == 'NC-17' %} selected {% endif %}>NC-17</option>
+    </select>
+        </div>
+        <div class="col">
+            <label for="exampleFormControlTextarea1" class="form-label">Release Date</label>
+            <input type="Date" class="form-control" name="movie_release_date" value="{{movie.release_date|date:'Y-m-d'}}" required id="exampleFormControlTextarea1"></input>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col-12">
+            <label for="exampleFormControlTextarea1" class="form-label">Movie Poster</label>
+            <input type="url" class="form-control" name="movie_poster" value="{{movie.poster}}" aria-label="Movie Poster">
+        </div>
+    </div>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <button class="btn btn-success" type="submit">Save</button>
+    </div>
+  </form>
+
+{% endblock %}
